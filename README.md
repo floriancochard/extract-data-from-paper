@@ -11,9 +11,9 @@ Historical weather records help understand past climate variability and trends, 
 
 In a cultural preservation effort, citizen science projects volunteer to rescue and extract observations data from books' tables. Although very effective, the task is repetitive and time-consuming. It took the [Operation Weather Rescue initiative](https://www.zooniverse.org/projects/edh/weather-rescue) 180 days and 3,300 volunteers to digitize 1,300,000 observations ([source](https://www.zooniverse.org/projects/edh/weather-rescue/stats/?classification=month&comment=month)).
 
-*Optical Character Recognition* (OCR) engines allow to extract text from documents. They give great results for computer-generated PDF documents (e.g., [Tabula](https://tabula.technology/) or [Textricator](https://textricator.mfj.io/)) or when input document is clean. But when books aren't scanned professionally, that characters are handwritten or in non-standard machine-typed fonts, that paper quality is bad and contains shadow or uneven contrasts, OCR output accuracy are low.
+*Optical Character Recognition* (OCR) engines allow to extract text from documents. They give great results for computer-generated PDF documents (e.g., [Tabula](https://tabula.technology/) or [Textricator](https://textricator.mfj.io/)) or when input document is clean. But as long as documents have shadow or uneven contrasts, that characters are handwritten or in non-standard machine-typed fonts, or that paper quality is bad among other elements, OCR output accuracy is low.
 
-The *Extract Data from Paper* project provides a framework to extract numerical values from tables in scanned weather books. Output are available as structured table forms (CSV, JSON), ready for download by the weather and climate community. The project includes computer vision tools for image processing, an *Optical Character Recognition* system and machine-learning algorithms to extract values at least 60 times faster than manually at >98% accuracy.
+The *Extract Data from Paper* project provides a framework to extract tabular data from scanned documents (PDF to CSV). Output are available as structured table forms (CSV, JSON), ready for download by the weather and climate community. The project includes computer vision tools and machine-learning based algorithms to extract numerical data at least 60 times faster than manually at >98% accuracy.
 
 ### Quick start
 **\[11/12/2019]: the project is an alpha version, information provided below aren't complete.**
@@ -31,10 +31,12 @@ Optional arguments are currently limited to:
 - `-v`: get version number
 
 ### Input data
-Input data is the historical weather data archive is the UK Met Office *[Observatories Year Book](https://digital.nmla.metoffice.gov.uk/SO_5575296f-0406-49f5-89cb-54cd79486b75/)*. It contains 46 books from 1922 to 1967 and each book includes 5 locations of interest, up to 30 variables (e.g., pressure, temperature, rainfall, relative humidity, wind speed and direction, duration of bright sunshine) of which daily extremes of pressure and temperature. Variables are available at daily, monthly and/or annual resolutions. Working on *Observatories Year Book* archive is motivated three-fold:
-1. good overall archive quality
-2. few layout variations across books
-3. typed text
+Input data is the historical weather data archive is the UK Met Office *[Observatories Year Book](https://digital.nmla.metoffice.gov.uk/SO_5575296f-0406-49f5-89cb-54cd79486b75/)*. It contains 46 books from 1922 to 1967 and each book includes 5 locations of interest, up to 30 variables (e.g., pressure, temperature, rainfall, relative humidity, wind speed and direction, duration of bright sunshine) of which daily extremes of pressure and temperature. Variables are available at daily, monthly and/or annual resolutions and displayed in tabular forms. Working on *Observatories Year Book* archive is motivated three-fold:
+1. good documents quality overall
+2. few layout variations across tables
+3. machine-typed text
+
+Next step of the project will consider [Stations of the Second Order](https://digital.nmla.metoffice.gov.uk/SO_feb1a621-72a3-4501-a6d2-8af1a8abe545/) that have lower archive quality and heterogeneous layouts.
 
 ## Motivations
 I didn't find any efficient solution to accurately extract data from weather books since the task requires a lot of tailored processing and tuning. Climate and weather community could greatly benefit from tools developed for computer vision, particularly to better understand past conditions. I also used to work on a project to simulate historical weather data (see [Hadley Innovation](https://hadley-innovation.herokuapp.com/)) and understand the value historical data represent for the weather community. Eventually I stumbled across an interesting tweet posted by [Ed Hawkins](https://en.wikipedia.org/wiki/Ed_Hawkins_(scientist)) that confirmed the need for a text extraction tool for old documents:
