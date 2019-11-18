@@ -2,6 +2,9 @@
 
 # Extract Data from Paper (EDP)
 ## Description
+
+Note (November 18th, 2019): code will be released when the processing is operational (soon).
+
 Historical weather records help understand past climate variability and trends, and develop more accurate climate prediction systems. Until mid-twentieth century, most historical records were handwritten or typed and registered in books, in the form of tables. To prevent damage or loss, these documents are digitised, but the process is hampered because:
 1. documents are sitting on the shelves of national weather services waiting to be found, or
 2. documents are known and scanned but need workforce to extract information manually.
