@@ -104,7 +104,7 @@ In summary, output text recognition accuracy relies heavily on input image quali
   "Mar. 100762 +023 +009 —0:09 —0-30 —0-38 —0-40 —0°33 —0'19 —0-11 —0-0I +06+02 40:03 —0-05 —0-18 —0-25 —0-28 —0-21 40-05 + 0°27 40°38 +043 + 0-47 + 0°42 +0-38"
   ```
 
-- Tesseract with Legacy (`--oem 0 --psm 6`)([output](./docs/txt/tesseract_OEM0.txt)) : best result
+- Tesseract with Legacy (`--oem 0 --psm 6`)([output](./docs/txt/tesseract_OEM0.txt))
   ```
   'Jan. 1003-56 +0-38 +0-27 +o-11 —-o-o7 —o-22 —0-37 —o\~33 —o-18 —o-10 —0-n —o-10 —0-27 —o-47 —0-59 —0-55 —o-38 —0-22 +o-02 +o-z7 +o-43 +o-57 +o\~62 +005 +o-62',
   "Feb. 1001-31 +o-24 +o-2x +0-05 —0-16 —0-22 »—o-27 —o-23 ——0-o5 +0-o6 +0-24 +0-26 +o-1z +0-oz —0-16 —o-27 —0-31 —0-15 —0-02 +o-oz +o-08 +0'07 +0'05 +013 +029",
