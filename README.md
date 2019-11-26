@@ -3,41 +3,32 @@
 # Extract Data from Paper (EDP)
 ## Description
 
-Note (November 18th, 2019): code will be released when the processing is operational (soon).
+Note (November 18th, 2019): code will be released when the processing chain is operational (soon).
 
-Historical weather records help understand past climate variability and trends, and develop more accurate climate prediction systems. Until mid-twentieth century, most historical records were handwritten or typed and registered in books, in the form of tables. To prevent damage or loss, these documents are digitised, but the process is hampered because:
-1. documents are sitting on the shelves of national weather services waiting to be found, or
+Historical weather records help understand past climate variability and trends, and develop more accurate climate prediction systems. Until mid-twentieth century, most historical weather records were handwritten or typed and registered in books in the form of tables. Nowadays these documents are digitised to prevent damage or loss, but this process is hampered because:
+1. documents are sitting on the shelves of national weather services, waiting to be found, or
 2. documents are known and scanned but need workforce to extract information manually.
 
 In a cultural preservation effort, citizen science projects volunteer to rescue and extract observations data from books' tables. Although very effective, the task is repetitive and time-consuming. It took the [Operation Weather Rescue initiative](https://www.zooniverse.org/projects/edh/weather-rescue) 180 days and 3,300 volunteers to digitize 1,300,000 observations ([source](https://www.zooniverse.org/projects/edh/weather-rescue/stats/?classification=month&comment=month)).
 
-*Optical Character Recognition* (OCR) engines allow to extract text from documents. They give great results for computer-generated PDF documents (e.g., [Tabula](https://tabula.technology/) or [Textricator](https://textricator.mfj.io/)) or when input document is clean. But when books aren't scanned professionally, that characters are handwritten or in non-standard machine-typed fonts, that paper quality is bad and contains shadow or uneven contrasts, OCR output accuracy are low.
+*Optical Character Recognition* (OCR) engines allow to extract text from documents. They give great results for computer-generated PDF documents (e.g., [Tabula](https://tabula.technology/) or [Textricator](https://textricator.mfj.io/)) or when input document is clean. However historical materials have multiple limitations that prevent high OCR output accuracy:
+- bad paper quality with shadow or uneven contrasts,
+- handwritten characters or in non-standard machine-typed fonts,
+- complex layout structure,
+- curved tables borders or skewed image
 
-The *Extract Data from Paper* project provides a framework to extract numerical values from tables in scanned weather books. Output are available as structured table forms (CSV, JSON), ready for download by the weather and climate community. The project includes computer vision tools for image processing, an *Optical Character Recognition* system and machine-learning algorithms to extract values at least 60 times faster than manually at >98% accuracy.
+The *Extract Data from Paper* project provides a processing chain to extract tabular data from scanned documents (PDF to CSV). Output are available as structured table forms and disseminated to the weather and climate community. The project includes computer vision tools and machine-learning based algorithms to extract numerical data at least 60 times faster than manually at >98% accuracy.
 
-### Quick start
-**\[11/12/2019]: the project is an alpha version, information provided below aren't complete.**
+### Use case
+Input data is the historical weather data archive from the UK Met Office *[Observatories Year Book](https://digital.nmla.metoffice.gov.uk/SO_5575296f-0406-49f5-89cb-54cd79486b75/)*. It contains 46 books from 1922 to 1967 and each book includes 5 locations of interest, up to 30 variables (e.g., pressure, temperature, rainfall, relative humidity, wind speed and direction, duration of bright sunshine) of which daily extremes of pressure and temperature. Variables are available at daily, monthly and/or annual resolutions and displayed in tabular forms. Working on *Observatories Year Book* archive is motivated three-fold:
+1. good documents quality overall
+2. few layout variations across tables
+3. machine-typed text
 
-1. Follow [this tutorial](https://github.com/tesseract-ocr/tesseract/wiki) to install Tesseract.
-
-2. Clone this archive, open a terminal, `cd source/` and run `python main.py`.
-
-At the moment you can do the following:
-- [X] Processing images (see `output` directory)
-- [ ] Create tabular output data (**SOON**)
-
-Optional arguments are currently limited to:
-- `-ro`: remove everything from `/output` directory
-- `-v`: get version number
-
-### Input data
-Input data is the historical weather data archive is the UK Met Office *[Observatories Year Book](https://digital.nmla.metoffice.gov.uk/SO_5575296f-0406-49f5-89cb-54cd79486b75/)*. It contains 46 books from 1922 to 1967 and each book includes 5 locations of interest, up to 30 variables (e.g., pressure, temperature, rainfall, relative humidity, wind speed and direction, duration of bright sunshine) of which daily extremes of pressure and temperature. Variables are available at daily, monthly and/or annual resolutions. Working on *Observatories Year Book* archive is motivated three-fold:
-1. good overall archive quality
-2. few layout variations across books
-3. typed text
+Next step of the project will consider [Stations of the Second Order](https://digital.nmla.metoffice.gov.uk/SO_feb1a621-72a3-4501-a6d2-8af1a8abe545/) that have lower archive quality and heterogeneous layouts.
 
 ## Motivations
-I didn't find any efficient solution to accurately extract data from weather books since the task requires a lot of tailored processing and tuning. Climate and weather community could greatly benefit from tools developed for computer vision, particularly to better understand past conditions. I also used to work on a project to simulate historical weather data (see [Hadley Innovation](https://hadley-innovation.herokuapp.com/)) and understand the value historical data represent for the weather community. Eventually I stumbled across an interesting tweet posted by [Ed Hawkins](https://en.wikipedia.org/wiki/Ed_Hawkins_(scientist)) that confirmed the need for a text extraction tool for old documents:
+I didn't find any efficient solution to accurately extract data from weather books since the task requires a lot of tailored processing and tuning. Climate and weather community could greatly benefit from tools developed by the computer vision community. In addition, I used to work on a project that simulated historical weather data (see [Hadley Innovation](https://hadley-innovation.herokuapp.com/)) and understand the value the latter represent to the weather community. Last, I stumbled across a tweet from [Ed Hawkins](https://en.wikipedia.org/wiki/Ed_Hawkins_(scientist)) that confirmed the need to develop a text extraction tool for historical weather documents:
 
 ![tweet by ed hawkins](./docs/png/tweet-ed-500px.png)
 
@@ -45,16 +36,17 @@ I didn't find any efficient solution to accurately extract data from weather boo
 ## Methodology
 Visit the wiki page on [processing chain](https://github.com/floriancochard/extract-data-from-paper/wiki/Processing-chain) for detailed information (**COMING SOON**).
 
-Processing chain is divided three-fold:
+Processing chain is divided four-fold:
 1. Image processing
-2. Image to text recognition
-3. Text processing
+2. Text recognition
+3. Text processing and correction
+4. Data population from unstructured to structured data
 
-In this project I use the open-source Tesseract OCR system in its 4.1.0 version (July, 2019). Although Tesseract does some automated [processing operations internally](https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality) before doing character recognition, output accuracy for *Observatories Year Book* is low. Hence I developed image processing modules to improve image quality and text recognition accuracy. Modules are based on open-source computer vision library [OpenCV](https://opencv.org/), python built-in functions, numpy, pandas or scikit-image. They are used to correct non-textual information (i.e., smear, shadow, noise, faint characters), binarize document (i.e., improve contrast between background and text), rotate image to correct skew angle, apply morphological operations to segment regions of interest, and so forth. Image processing chain is summarized below and detailed further in section *Detailed processing chain*.
+In this project I use the open-source Tesseract OCR system in its 4.1.0 version (July, 2019) to extract data from image. Although Tesseract does some automated [processing operations internally](https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality) before character recognition, output accuracy for *Observatories Year Book* is low. Hence I developed image processing modules to prepare image and improve text recognition accuracy. Modules are based on open-source computer vision library [OpenCV](https://opencv.org/), python built-in functions, numpy, pandas or scikit-image. They are used to correct non-textual information (i.e., smear, shadow, noise, faint characters), binarize document (i.e., improve contrast between background and text), rotate image to correct skew angle, apply morphological operations to segment regions of interest, and so forth. Image processing methodology is summarized below and detailed further in section *Detailed processing chain*.
 
 ![pre-processing](./docs/png/preprocessing-chain-lr.png)
 
-Developing a text segmentation and recognition system for any type of document is challenging. Although the image and text processing chain are designed to be robust, the code requires manual tweaking for threshold values or kernel size during morphological operations. At the moment, the code only applies to the *Observatories Year Book* archive. For example, Otsu binarization gives great results for the *Observatories Year Book* archive but can hardly be used on a lower quality document, such as the [Stations of the Second Order](https://digital.nmla.metoffice.gov.uk/SO_feb1a621-72a3-4501-a6d2-8af1a8abe545/). For the latter, some binarization techniques for low quality documents are referenced in the literature and show promising results. Future works will give more credits to these methods; at the moment they are included in the wiki page.
+Developing a text segmentation and recognition system for any type of document is challenging. Although the image and text processing chain are designed to be robust, the code requires manual tweaking for threshold values or kernel size during morphological operations. At the moment, the script only applies to the *Observatories Year Book* archive. For example, Otsu binarization gives great results for the *Observatories Year Book* archive but can hardly be used on a lower quality document, such as the [Stations of the Second Order](https://digital.nmla.metoffice.gov.uk/SO_feb1a621-72a3-4501-a6d2-8af1a8abe545/). For the latter, some binarization techniques for low quality documents are referenced in the literature and show promising results. Future works will give more credits to these methods; at the moment they are included in the wiki page.
 
 See the [wiki page](https://github.com/floriancochard/extract-data-from-paper/wiki/Processing-chain) for more information about processing and project development roadmap.
 
@@ -79,7 +71,7 @@ Output are similar to the table below (CSV are not generated yet):
 
 ## Closing remarks
 
-I quickly benchmarked OCR systems with [Microsoft Azure Cognitive Service](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/), [Amazon Textract](https://aws.amazon.com/textract/), [Google Vision API](https://cloud.google.com/vision/docs/ocr) and [Tesseract](https://opensource.google/projects/tesseract). First 3 lines from block *Pressure at station level; monthly means and diurnal inequalities* are shown below for quick inter-comparison. Full text recognition output are available for download next to each OCR system. In a nutshell, Amazon Textract and Microsoft Azure Cognition Service don't segment correctly the page which negatively impacts recognition. Amazon Textract completely removes the layout structure while Microsoft Azure brings more satisfying results in this regards. Recent release of [Form Recognizer](https://azure.microsoft.com/en-us/services/cognitive-services/form-recognizer/) from Microsoft Azure Cognition Service may improve overall accuracy (not tested). Google Vision API and Tesseract show good segmentation and keep layout structure. In all cases, some characters are still not read correctly and require text post-processing.
+I quickly benchmarked OCR systems with [Microsoft Azure Cognitive Service](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/), [Amazon Textract](https://aws.amazon.com/textract/), [Google Vision API](https://cloud.google.com/vision/docs/ocr) and [Tesseract](https://opensource.google/projects/tesseract). First 3 lines from block *Pressure at station level; monthly means and diurnal inequalities* are shown below for quick inter-comparison. Full text recognition output are available for download next to each OCR system's name. In a nutshell, Amazon Textract and Microsoft Azure Cognition Service don't segment correctly the page which negatively impacts recognition. Amazon Textract completely removes the layout structure while Microsoft Azure brings more satisfying results in this regards. Recent release of [Form Recognizer](https://azure.microsoft.com/en-us/services/cognitive-services/form-recognizer/) from Microsoft Azure Cognition Service may improve overall accuracy (not tested). Google Vision API and Tesseract show good segmentation and keep layout structure. In all cases, some characters are still not read correctly and require text post-processing.
 
 In summary, output text recognition accuracy relies heavily on input image quality.
 
@@ -119,4 +111,4 @@ In summary, output text recognition accuracy relies heavily on input image quali
   "Mar. 1007-62 +o-23 +o-09 —0-09 —o-3o —0-38 —0-40 —o-33 —o-19 —o-11 —o-01 +0-oz +o-o3 —o-o5 —0-18 —o-z5 ——0-28 —o-21 +0-05 +0-z7 +0-38 +0'43 +047 +o-42 +o\~38"
   ```
 
-Feel free to reach out to discuss some statements or share feedback. See the [wiki page](https://github.com/floriancochard/extract-data-from-paper/wiki/Processing-chain) for more information about processing and project development roadmap. I'm not a developer *per se* but do my best to use good habits in code development. To that extent, I'm interested in correspondence about how the code and the project can be improved.
+Feel free to reach out to discuss some statements or share feedback. See the [wiki page](https://github.com/floriancochard/extract-data-from-paper/wiki/Processing-chain) for more information about processing and project development roadmap. I'm not a developer *per se* but do my best to use good habits in code development. I'm interested in correspondence about how the code and the project can be improved.
