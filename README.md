@@ -67,9 +67,17 @@ jupyter notebook notebook.ipynb
 - `-ro`: Clear output directory
 - `-verbose`: Enable detailed logging
 
-## Pipeline Stages
+## Processing Pipeline
 
-The system implements a multi-stage processing pipeline to improve OCR accuracy:
+The project leverages the following OCR and image processing tech:
+
+- Engine: Tesseract OCR 4.1.0 (July 2019) (Legacy mode)
+- Page Segmentation Mode: 6
+- Language: English
+- OpenCV for image processing
+- Python libraries: NumPy, Pandas, scikit-image
+
+The system implements a multi-stage pipeline using Tesseract OCR, OpenCV, and Python data processing libraries:
 
 1. **Input Processing**
 
@@ -110,15 +118,7 @@ The pipeline is specifically optimized for the UK Met Office Observatories Year 
 
 ![pre-processing](./docs/png/preprocessing-chain-lr.png)
 
-### OCR Configuration
-
-- Engine: Tesseract OCR 4.1.0 (July 2019) (Legacy mode)
-- Page Segmentation Mode: 6
-- Language: English
-- OpenCV for image processing
-- Python libraries: NumPy, Pandas, scikit-image
-
-### Technical Limitations
+## Technical Limitations
 
 - Manual parameter tuning required:
   - Threshold values
@@ -129,17 +129,15 @@ The pipeline is specifically optimized for the UK Met Office Observatories Year 
   - Otsu binarization works well for high-quality scans
   - Alternative techniques needed for degraded documents
 
-> For detailed information about the processing pipeline and future development plans, see our [wiki page](https://github.com/floriancochard/extract-data-from-paper/wiki/Processing-chain).
+## Dataset
 
-### Output Format
+The project focuses on the UK Met Office Observatories Year Book (1922-1967) _[Observatories Year Book](https://digital.nmla.metoffice.gov.uk/SO_5575296f-0406-49f5-89cb-54cd79486b75/)_ which includes:
 
-The program generates CSV files containing:
+- Data from 5 locations
+- Up to 30 weather variables
+- Daily, monthly, and annual measurements
 
-- Extracted table data
-- Block-by-block content
-- Line-by-line information
-
-### Performance Comparison
+## Performance
 
 Based on benchmarks against other OCR solutions:
 
@@ -190,8 +188,6 @@ Based on benchmarks against other OCR solutions:
 
 ## Background
 
-### Problem Context
-
 Historical weather records are crucial for:
 
 - Understanding climate variability
@@ -207,11 +203,3 @@ Traditional manual digitization process was:
 - Time-consuming: It took the [Operation Weather Rescue initiative](https://www.zooniverse.org/projects/edh/weather-rescue) 180 days and 3,300 volunteers to digitize 1,300,000 observations ([source](https://www.zooniverse.org/projects/edh/weather-rescue/stats/?classification=month&comment=month)).
 - Labor-intensive
 - Prone to human error
-
-### Dataset
-
-The project focuses on the UK Met Office Observatories Year Book (1922-1967) _[Observatories Year Book](https://digital.nmla.metoffice.gov.uk/SO_5575296f-0406-49f5-89cb-54cd79486b75/)_ which includes:
-
-- Data from 5 locations
-- Up to 30 weather variables
-- Daily, monthly, and annual measurements
