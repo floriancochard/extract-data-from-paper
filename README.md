@@ -62,17 +62,11 @@ python main.py
 jupyter notebook notebook.ipynb
 ```
 
-<<<<<<< HEAD
 You also have a few optional args you can use:
 
 - `-ro`: Clear output directory
-- # `-i`: Specify path to input
-
-## Command Line Options
-
-- `-ro`: Clear output directory
-  > > > > > > > d0ed394849e04b27d8b50376f5e1de61dc3d4b35
-- `-verbose`: Enable detailed logging
+- `-i`: Specify path to input
+- `-verbose`: Verbose mode
 
 ## Processing Pipeline
 
