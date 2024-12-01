@@ -62,9 +62,14 @@ python main.py
 jupyter notebook notebook.ipynb
 ```
 
-## Pipeline Description
+## Command Line Options
+
+- `-ro`: Clear output directory
+- `-verbose`: Enable detailed logging
 
 ## Pipeline Stages
+
+The system implements a multi-stage processing pipeline to improve OCR accuracy:
 
 1. **Input Processing**
 
@@ -80,7 +85,7 @@ jupyter notebook notebook.ipynb
 3. **Image Enhancement**
 
    - Cleans and improves image quality
-   - Reduces noise and shadows
+   - Reduces noise, removes shadow and smear
    - Enhances text visibility
    - Prepares images for OCR processing (see /output folder)
 
@@ -92,7 +97,7 @@ jupyter notebook notebook.ipynb
 
 5. **Text Extraction**
 
-   - Performs OCR on blocks or individual lines
+   - Performs OCR on blocks or individual lines (Binarization for background-text contrast, skew angle correction, morphological operations for region segmentation)
    - Processes extracted text to correct common OCR errors
    - Preserves metadata (year, page, block numbers)
 
@@ -103,39 +108,15 @@ jupyter notebook notebook.ipynb
 
 The pipeline is specifically optimized for the UK Met Office Observatories Year Book archive and requires Tesseract OCR installation.
 
-## Command Line Options
-
-- `-ro`: Clear output directory
-- `-verbose`: Enable detailed logging
-
-## Technical Implementation
-
-### Core Technologies
-
-- Tesseract OCR 4.1.0 (July 2019)
-- OpenCV for image processing
-- Python libraries: NumPy, Pandas, scikit-image
-
-### Image Processing Pipeline
-
-The system implements a multi-stage processing pipeline to improve OCR accuracy:
-
-1. **Pre-processing**
-   - Noise reduction
-   - Shadow and smear removal
-   - Character enhancement for faint text
-2. **Document Enhancement**
-   - Binarization for background-text contrast
-   - Skew angle correction
-   - Morphological operations for region segmentation
-
 ![pre-processing](./docs/png/preprocessing-chain-lr.png)
 
 ### OCR Configuration
 
-- Engine: Tesseract (Legacy mode)
+- Engine: Tesseract OCR 4.1.0 (July 2019) (Legacy mode)
 - Page Segmentation Mode: 6
 - Language: English
+- OpenCV for image processing
+- Python libraries: NumPy, Pandas, scikit-image
 
 ### Technical Limitations
 
