@@ -62,9 +62,10 @@ python main.py
 jupyter notebook notebook.ipynb
 ```
 
-## Command Line Options
+You also have a few optional args you can use:
 
 - `-ro`: Clear output directory
+- `-i`: Specify path to input
 - `-verbose`: Enable detailed logging
 
 ## Processing Pipeline
