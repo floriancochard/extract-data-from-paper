@@ -1,0 +1,2 @@
+/Users/floriancochard/Documents/extract-data-from-paper-public/src/data/output/block/block_y1922-p028-b0.png
+/Users/floriancochard/Documents/extract-data-from-paper-public/src/data/output/block/block_y1922-p040-b0.png

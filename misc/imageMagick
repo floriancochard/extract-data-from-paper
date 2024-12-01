@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Function for line detection processing
+process_line_detection() {
+    local input=$1
+    local output=$2
+    convert \( "$input" -density 300 -alpha off -colorspace gray -threshold 75% -bordercolor white -border 10x10 \) \
+    \( -clone 0 -morphology close rectangle:1x60 -negate -morphology dilate octagon:2 \) \
+    \( -clone 0 -morphology close rectangle:45x1 -negate -morphology dilate octagon:2 \) \
+    \( -clone 1 -clone 2 -evaluate-sequence add \) \
+    -delete 1,2 \
+    -compose plus -composite \
+    "$output"
+}
+
+# Function for PDF to PNG conversion
+convert_pdf_to_png() {
+    local input=$1
+    local output=$2
+    local density=${3:-300}  # Default density 300
+    convert -density "$density" -antialias -quality 100 "$input" "$output"
+}
+
+# Function for basic image preprocessing
+preprocess_image() {
+    local input=$1
+    local output=$2
+    convert -density 600 "$input" -negate -morphology erode octagon:1 -negate "$output"
+}
+
+# Function to run benchmark
+run_benchmark() {
+    local input=$1
+    local output=$2
+    local iterations=${3:-40}  # Default 40 iterations
+    convert -bench "$iterations" "$input" -density 300 -antialias -quality 100 "$output"
+}
+
+# Usage examples:
+# process_line_detection "single-600dpi.png" "result.png"
+# convert_pdf_to_png "input.pdf" "output-%03d.png"
+# preprocess_image "single-preprocessed-opt-600dpi.png" "test.png"
+# run_benchmark "input.pdf" "output.png" 40
+
+

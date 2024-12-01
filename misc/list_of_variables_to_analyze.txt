@@ -1,0 +1,19 @@
+22 27 110 113 (pressure)
+28 114 (pressure at station lev, monthly means and diurnal inequalities, extremes)
+
+29 32 116 120 (temperature)
+35 (tas at station lev, monthly means and diurnal inequalities, extremes)
+
+36 39 123 127(rel hum)
+42 121 128(rel hum at station lev, monthly means and diurnal inequalities, extremes)
+
+only for testing 
+46 48 129 132(rainfall)
+50 53 136 138(duration of bright sunshine)
+55 57 58 63 141 144 150(wind dir speed)
+153 (highest inst wind speed /distribution of wind speed - interesting)
+67 154 (temperature in ground)
+162 163 (gradient potential --> big problems with +- signs may occur !)
+165 166 173 187 terrestrial magnetic force 
+189 (hard one !)
+204205 (microseisms)

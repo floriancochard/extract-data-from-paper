@@ -1,0 +1,34 @@
+[
+  {
+    "aberdeen": {
+      "value": "Aberdeen",
+      "latitude": "57 10N",
+      "longitude": "2 6W",
+      "height": "14.0"
+    },
+    "eskdalemuir": {
+      "value": "Eskdalemuir, Dumfries-shire",
+      "latitude": "55 19N",
+      "longitude": "3 12W",
+      "height": "242.0"
+    },
+    "valencia": {
+      "value": "Valencia Observatory, Cahirciveen, Co. Kerry",
+      "latitude": "51 56N",
+      "longitude": "10 15W",
+      "height": "9.1"
+    },
+    "kew observatory": {
+      "value": "Kew Observatory, Richmond, Surrey",
+      "latitude": "51 28N",
+      "longitude": "0 19W",
+      "height": "5.5"
+    },
+    "benson": {
+      "value": "Benson, Oxfordshire",
+      "latitude": "51 37N",
+      "longitude": "1 7W",
+      "height": "57.0"
+    }
+  }
+]
