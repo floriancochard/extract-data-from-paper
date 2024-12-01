@@ -62,6 +62,47 @@ python main.py
 jupyter notebook notebook.ipynb
 ```
 
+## Pipeline Description
+
+## Pipeline Stages
+
+1. **Input Processing**
+
+   - Handles command line options (`-ro` to clear output, `-verbose` for detailed logs)
+   - Validates input files and paths
+
+2. **Document Selection**
+
+   - Evaluates document quality using line detection
+   - Filters out pages with insufficient data quality
+   - Ensures only processable documents continue through pipeline
+
+3. **Image Enhancement**
+
+   - Cleans and improves image quality
+   - Reduces noise and shadows
+   - Enhances text visibility
+   - Prepares images for OCR processing (see /output folder)
+
+4. **Block Detection**
+
+   - Identifies and extracts distinct data blocks from each page
+   - Creates separate image files for each block
+   - Maintains document structure information
+
+5. **Text Extraction**
+
+   - Performs OCR on blocks or individual lines
+   - Processes extracted text to correct common OCR errors
+   - Preserves metadata (year, page, block numbers)
+
+6. **Data Export**
+   - Generates structured CSV output (see output.csv)
+   - Includes extracted text and document metadata
+   - Organizes data by year, page, and block
+
+The pipeline is specifically optimized for the UK Met Office Observatories Year Book archive and requires Tesseract OCR installation.
+
 ## Command Line Options
 
 - `-ro`: Clear output directory
